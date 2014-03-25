@@ -1,0 +1,58 @@
+//drawing tool 3
+//si formano cerchi speculari. La dimensione dei cerchi dipende dalla
+//posizione del mouse.
+//colori random
+//framerate cambia in base alla modalità di interazione con il mouse
+
+import generativedesign.*;
+import processing.pdf.*;
+import java.util.Calendar;
+
+boolean savePDF = false;
+
+float color1 = random(0,255);
+float color2 = random(0,255);
+float color3 = random(0,255);
+
+  
+void setup(){
+ frameRate(30);
+  colorMode(RGB);
+ size(640, 480);
+ smooth();
+ noCursor();
+}
+ 
+void draw(){
+ if (savePDF) {
+  beginRecord(PDF, timestamp()+".pdf");
+ } 
+  
+  float color1 = random(0,255);
+  float color2 = random(0,255);
+  float color3 = random(0,255);
+  
+  if(mousePressed){
+    frameRate(1);
+    background (color1,color2,color3);
+  }
+  
+  else{
+    frameRate(30);
+  fill(color1, color2, color3);
+  ellipse(mouseX, mouseY, mouseX-150, mouseX-150);
+  ellipse(width-mouseX, height-mouseY, mouseX-150, mouseX-150);
+  }
+  if (savePDF) {
+    savePDF = false;
+    endRecord();
+ }
+} 
+
+
+ //timestamp
+String timestamp() {
+  Calendar now = Calendar.getInstance();
+  return String.format("%1$ty%1$tm%1$td_%1$tH%1$tM%1$tS", now);
+}
+
