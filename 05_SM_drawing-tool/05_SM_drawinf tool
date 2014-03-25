@@ -1,0 +1,60 @@
+//strumento di disegno
+//lo spessore del pennello dipende dalla pressione su trackpad
+//i tasti da 1 a 4 cambiano il colore del pennello
+
+import processing.pdf.*;
+float mx= mouseX;
+float my= mouseY;
+color col = color(181,157,0,100);
+
+void setup() {
+  size(400,400);
+  smooth();
+  colorMode(RGB);
+}
+ 
+void draw() {
+   
+  float abstand = dist(mouseX, mouseY, mx, my);
+ 
+ //pressione tocco
+  if(mousePressed == true) {
+    if (abstand > 15) { 
+      abstand = 15;
+    }
+
+    strokeWeight(15-abstand);
+    stroke(col);
+    line(mouseX, mouseY,mx, my);
+    
+     mx= mouseX;
+     my= mouseY;
+  }
+ 
+}
+ 
+ 
+void keyPressed() {
+ println("mouse gedrückt");
+ stroke(random(255),100,50);
+}
+ 
+void mousePressed() {
+   //if (key ==  's') {
+     //println("Frame abspeichern");
+     //saveFrame("screenshot-####.tif");
+   //}
+   if (key == 'b') {
+     background(100);
+   }
+ 
+}
+
+//diversi colori
+void keyReleased() {
+ if (key == '1') col = color(181,157,0,100);
+  if (key == '2') col = color(0,1302,164,100);
+  if (key == '3') col = color(87,35,129,100);
+  if (key == '4') col = color(197,0,123,100);
+}
+ 
